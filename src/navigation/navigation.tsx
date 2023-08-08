@@ -5,8 +5,8 @@ const defaultExport = [
     icon: 'tabler:smart-home'
   },
   {
-    title: 'Module1',
-    path: '/module1',
+    title: 'Users',
+    path: '/users',
     icon: 'tabler:smart-home'
   }
 ]
