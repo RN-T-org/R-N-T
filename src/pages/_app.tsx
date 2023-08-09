@@ -7,10 +7,6 @@ import { Router } from 'next/router'
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 
-
-
-
-
 // ** Loader Import
 import NProgress from 'nprogress'
 
@@ -62,6 +58,10 @@ import 'src/iconify-bundle/icons-bundle-react'
 
 // ** Global css styles
 import '../../styles/globals.css'
+
+// ** Redux Imports
+import { store } from '../redux/store'
+import { Provider } from 'react-redux'
 
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
@@ -118,19 +118,19 @@ const App = (props: ExtendedAppProps) => {
   const aclAbilities = Component.acl ?? defaultACLObj
 
   return (
-    
-      <CacheProvider value={emotionCache}>
-        <Head>
-          <title>{`${themeConfig.templateName} - Material Design React Admin Template`}</title>
-          <meta
-            name='description'
-            content={`${themeConfig.templateName} – Material Design React Admin Dashboard Template – is the most developer friendly & highly customizable Admin Dashboard Template based on MUI v5.`}
-          />
-          <meta name='keywords' content='Material Design, MUI, Admin Template, React Admin Template' />
-          <meta name='viewport' content='initial-scale=1, width=device-width' />
-        </Head>
+    <CacheProvider value={emotionCache}>
+      <Head>
+        <title>{`${themeConfig.templateName} - Material Design React Admin Template`}</title>
+        <meta
+          name='description'
+          content={`${themeConfig.templateName} – Material Design React Admin Dashboard Template – is the most developer friendly & highly customizable Admin Dashboard Template based on MUI v5.`}
+        />
+        <meta name='keywords' content='Material Design, MUI, Admin Template, React Admin Template' />
+        <meta name='viewport' content='initial-scale=1, width=device-width' />
+      </Head>
 
-        <AuthProvider>
+      <AuthProvider>
+        <Provider store={store}>
           <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
             <SettingsConsumer>
               {({ settings }) => {
@@ -149,9 +149,9 @@ const App = (props: ExtendedAppProps) => {
               }}
             </SettingsConsumer>
           </SettingsProvider>
-        </AuthProvider>
-      </CacheProvider>
-   
+        </Provider>
+      </AuthProvider>
+    </CacheProvider>
   )
 }
 

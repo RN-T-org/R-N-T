@@ -8,6 +8,9 @@ const path = require('path')
 module.exports = {
   trailingSlash: true,
   reactStrictMode: false,
+  env: {
+    API_URL: process.env.NEXT_API_URL
+  },
   webpack: config => {
     config.resolve.alias = {
       ...config.resolve.alias,
